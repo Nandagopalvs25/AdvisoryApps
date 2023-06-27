@@ -6,7 +6,6 @@ void main() {
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -14,13 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Advisory App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-     initialRoute: RouteGenerator.landingPage,
-
-onGenerateRoute: RouteGenerator.generateRoute,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      initialRoute: RouteGenerator.landingPage,
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
-

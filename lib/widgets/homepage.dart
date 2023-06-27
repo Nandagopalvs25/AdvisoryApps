@@ -23,8 +23,7 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends State<HomePageView> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Approvals(),
     StudentsList(),
@@ -58,7 +57,7 @@ class _HomePageViewState extends State<HomePageView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: 'School',
+            label: 'Internships',
           ),
         ],
         currentIndex: _selectedIndex,

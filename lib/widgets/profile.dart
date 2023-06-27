@@ -19,7 +19,8 @@ class Profile extends StatelessWidget {
             api.logout();
             SharedPreferences prefs = await SharedPreferences.getInstance();
             prefs.remove('username');
-            Navigator.of(context,rootNavigator: true)?.pushNamedAndRemoveUntil(RouteGenerator.loginPage,(Route<dynamic> route) => false);
+            Navigator.of(context, rootNavigator: true)
+                ?.pushNamedAndRemoveUntil(RouteGenerator.loginPage, (Route<dynamic> route) => false);
           }),
     );
   }

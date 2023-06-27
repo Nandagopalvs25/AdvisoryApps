@@ -23,18 +23,22 @@ class _LandingState extends State<Landing> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _userId = (prefs.getString('username') ?? "");
     _token = (prefs.getString('token') ?? "");
+
+    Baseapi api = Baseapi();
+    var res = await api.getUser(_userId);
+
     if (_userId == "") {
-      Navigator.of(context)?.pushNamedAndRemoveUntil(
-          RouteGenerator.loginPage, (Route<dynamic> route) => false);
-    } else {
-      Baseapi api = Baseapi();
-      var res = await api.getUser(_userId);
-      if (res.statusCode == 200) {
-        Navigator.of(context)?.pushNamedAndRemoveUntil(
-            RouteGenerator.homePage, (Route<dynamic> route) => false);
+      Navigator.of(context)?.pushNamedAndRemoveUntil(RouteGenerator.loginPage, (Route<dynamic> route) => false);
+    }
+      else if (res.statusCode == 200) {
+        Navigator.of(context)?.pushNamedAndRemoveUntil(RouteGenerator.homePage, (Route<dynamic> route) => false);
+      }
+      else{
+        Navigator.of(context)?.pushNamedAndRemoveUntil(RouteGenerator.loginPage, (Route<dynamic> route) => false);
+
       }
     }
-  }
+  
 
   @override
   Widget build(BuildContext context) {

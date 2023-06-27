@@ -1,8 +1,11 @@
+import 'package:advisory_app/models/userModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Baseapi {
-  static var base = "advisoryapi-t8cai.ondigitalocean.app/api/auth/login/";
+  static var base = "oyster-app-m5xd2.ondigitalocean.app/api/auth/login/";
   Map<String, String> headers = {
     "Content-Type": "application/json; charset=UTF-8"
   };
@@ -11,7 +14,7 @@ class Baseapi {
     var body = jsonEncode({'username': username, 'password': password});
 
     http.Response response = await http.post(
-        Uri.https('advisoryapi-t8cai.ondigitalocean.app', '/api/auth/login/'),
+        Uri.https('oyster-app-m5xd2.ondigitalocean.app', '/api/auth/login/'),
         headers: headers,
         body: body);
     print(response.body);
@@ -20,29 +23,51 @@ class Baseapi {
 
   Future<http.Response> logout() async {
     http.Response response = await http.post(
-      Uri.https('advisoryapi-t8cai.ondigitalocean.app', '/api/auth/logout/'),
+      Uri.https('oyster-app-m5xd2.ondigitalocean.app', '/api/auth/logout/'),
       headers: headers,
     );
-    
-    print(response.body);
-    print(response.statusCode);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String username = (prefs.getString('username') ?? '');
     return response;
   }
 
-   Future<http.Response> getUser(String username) async {
+  Future<http.Response> getUser(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = (prefs.getString('token') ?? '');
     Map<String, String> headers = {
-    "Content-Type": "application/json; charset=UTF-8",
-    "Authorization": "Token b5f0825d48921c47dcf45109f520e9985634ba87"
-  };
+      "Content-Type": "application/json; charset=UTF-8",
+      "Authorization": "Token $token"
+    };
     http.Response response = await http.get(
-      Uri.https('advisoryapi-t8cai.ondigitalocean.app', '/api/user/$username'),
+      Uri.https('oyster-app-m5xd2.ondigitalocean.app', '/api/user/$username'),
       headers: headers,
     );
-    print(response.body);
-    print(response.statusCode);
     return response;
+  }
+   Future<List<UserModel>> getUsersList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = (prefs.getString('token') ?? '');
+    Map<String, String> headers = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "Authorization": "Token $token"
+    };
+    http.Response response = await http.get(
+      Uri.https('oyster-app-m5xd2.ondigitalocean.app', '/api'),
+      headers: headers,
+    );
+
+
+    if (response.statusCode == 200) {
+      return UserModel.fromJsonList(json);
+    } else {
+      throw Exception('Request Failed.');
+    }
+    print(response.body);
+   
   }
 
 
 
+
+ 
 }

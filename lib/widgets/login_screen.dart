@@ -46,8 +46,7 @@ class _loginState extends State<login> {
         children: [
           TextField(
             controller: _username,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), labelText: 'Username'),
+            decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Username'),
           ),
           TextField(
             controller: _password,
@@ -66,13 +65,12 @@ class _loginState extends State<login> {
                 if (res.statusCode == 200) {
                   Map<String, dynamic> user = jsonDecode(res.body);
                   String token = user['key'];
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
                   await prefs.setString("username", (username));
                   await prefs.setString("token", token);
 
-                  Navigator.of(context)?.pushNamedAndRemoveUntil(
-                      RouteGenerator.homePage, (Route<dynamic> route) => false);
+                  Navigator.of(context)
+                      ?.pushNamedAndRemoveUntil(RouteGenerator.homePage, (Route<dynamic> route) => false);
                 }
               },
               child: Text('Log in'))
