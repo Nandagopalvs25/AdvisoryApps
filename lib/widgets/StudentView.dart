@@ -46,7 +46,7 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Student Profile")),
+      appBar: AppBar(title: const Text("Student Profile")),
       body: FutureBuilder<UserModel>(
         future: getUser(widget.username),
         builder: (ctx, snapshot) {
