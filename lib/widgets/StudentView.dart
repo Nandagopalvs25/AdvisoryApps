@@ -230,7 +230,7 @@ class _StudentViewState extends State<StudentView> {
                       String? usr = snapshot.data!.username;
                       http.Response response = await http.put(
                           Uri.https('oyster-app-m5xd2.ondigitalocean.app',
-                              '/api/user/$usr'),
+                              '/api/user/update/$usr'),
                           headers: headers,
                           body: body);
                       print(response.body);
