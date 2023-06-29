@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StudentView extends StatefulWidget {
   final String username;
@@ -46,7 +47,7 @@ class _StudentViewState extends State<StudentView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Student Profile")),
+      appBar: AppBar(title:  Text("Student Profile",style: GoogleFonts.robotoCondensed(fontSize: 30),),),
       body: FutureBuilder<UserModel>(
         future: getUser(widget.username),
         builder: (ctx, snapshot) {
@@ -128,7 +129,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Phone no: ",
                       style: TextStyle(fontSize: 20),
                     ),

@@ -39,9 +39,7 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Advisory App'),
-      ),
+      
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

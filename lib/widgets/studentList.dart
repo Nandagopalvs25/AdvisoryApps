@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:advisory_app/api.dart';
 import 'package:advisory_app/routes.dart';
@@ -7,8 +8,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/userModel.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const List<String> list = <String>['All', 'B22ECA', 'B22ECB'];
 String batch = "All";
@@ -24,7 +26,7 @@ class _StudentsListState extends State<StudentsList> {
   final TextEditingController _searchController = TextEditingController();
   String dropdownValue = list.first;
   String usern = "";
-
+  bool showTextField = true;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
@@ -32,50 +34,68 @@ class _StudentsListState extends State<StudentsList> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
-            body: Container(
+            appBar: AppBar(
+              title:  Center(
+                child: Text("Students",style: GoogleFonts.robotoCondensed(fontSize: 30),),
+              ),
+              backgroundColor: const Color.fromARGB(47, 29, 87, 86),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.only(top: 15),
               child: Column(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
+                  ListTile(
+                    title: TextField(
                       controller: _searchController,
                       decoration: InputDecoration(
-                          hintText: 'Search..',
-                          prefixIcon: IconButton(
-                              icon: Icon(Icons.search),
-                              onPressed: () {
-                                setState(() {
-                                  usern = _searchController.text;
-                                });
-                              }),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0))),
+                        hintText: 'Search..',
+                        suffixIcon: IconButton(
+                            icon: const Icon(Icons.search),
+                            onPressed: () {
+                              setState(() {
+                                usern = _searchController.text;
+                              });
+                            }),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide.none),
+                      ),
                     ),
-                  ),
-                  DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: const Icon(Icons.arrow_downward),
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
+                    
+                    trailing: DropdownButton<String>(
+                      value: dropdownValue,
+                      icon: const FaIcon(FontAwesomeIcons.sort),
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String? value) {
+                        setState(() {
+                          dropdownValue = value!;
+                          batch = value;
+                          usern = _searchController.text;
+                        });
+                      },
+                      items: list.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
-                    onChanged: (String? value) {
-                      setState(() {
-                        dropdownValue = value!;
-                        batch = value;
-                        usern = _searchController.text;
-                      });
-                    },
-                    items: list.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        side: const BorderSide(
+                            color: Colors.green,
+                            style: BorderStyle.solid,
+                            width: 2)),
                   ),
-                  Expanded(
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  SingleChildScrollView(
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
@@ -91,7 +111,11 @@ class _StudentsListState extends State<StudentsList> {
                             },
                             title: Text(snapshot.data![index]['username']),
                             subtitle: Text(snapshot.data![index]['batch']),
-                            leading: Icon(Icons.arrow_right_alt_rounded),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.blue[200],
+                              backgroundImage: const NetworkImage(
+                                  "https://media.discordapp.net/attachments/996754697849405540/1106485239670386719/profile.jpeg?width=400&height=400"),
+                            ),
                           ),
                         );
                       },
@@ -129,8 +153,7 @@ Future<List<dynamic>> fetchData(String username, String batch) async {
       'search': username,
     };
     http.Response response = await http.get(
-      Uri.https(
-          '$ur', '/api/', queryParameters),
+      Uri.https('$ur', '/api/', queryParameters),
       headers: headers,
     );
     print(response.body);
@@ -144,8 +167,7 @@ Future<List<dynamic>> fetchData(String username, String batch) async {
       'search': username,
     };
     http.Response response = await http.get(
-      Uri.https(
-          '$ur', '/api/', queryParameters),
+      Uri.https('$ur', '/api/', queryParameters),
       headers: headers,
     );
     print(response.body);
@@ -157,8 +179,7 @@ Future<List<dynamic>> fetchData(String username, String batch) async {
   } else if (username != "" && batch != "") {
     final queryParameters = {'search': username, 'batch': batch};
     http.Response response = await http.get(
-      Uri.https(
-          '$ur', '/api/', queryParameters),
+      Uri.https('$ur', '/api/', queryParameters),
       headers: headers,
     );
     print(response.body);
@@ -172,8 +193,7 @@ Future<List<dynamic>> fetchData(String username, String batch) async {
       'search': username,
     };
     http.Response response = await http.get(
-      Uri.https(
-          '$ur', '/api/', queryParameters),
+      Uri.https('$ur', '/api/', queryParameters),
       headers: headers,
     );
     print(response.body);
@@ -185,8 +205,7 @@ Future<List<dynamic>> fetchData(String username, String batch) async {
   } else if (batch != "") {
     final queryParameters = {'batch': batch};
     http.Response response = await http.get(
-      Uri.https(
-          '$ur', '/api/', queryParameters),
+      Uri.https('$ur', '/api/', queryParameters),
       headers: headers,
     );
     print(response.body);

@@ -5,8 +5,9 @@ class Approvals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("APPROVALS SECTION"),
+    return   Scaffold(
+      appBar: AppBar(title: Text("Approvals")),
+      body: const Text("APPROVALS SECTION"),
     );
   }
 }

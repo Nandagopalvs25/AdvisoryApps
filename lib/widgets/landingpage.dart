@@ -35,7 +35,6 @@ class _LandingState extends State<Landing> {
       }
       else{
         Navigator.of(context)?.pushNamedAndRemoveUntil(RouteGenerator.loginPage, (Route<dynamic> route) => false);
-
       }
     }
   
@@ -43,6 +42,6 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(body: Center(child: CircularProgressIndicator()));
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
