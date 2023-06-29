@@ -62,7 +62,17 @@ class _StudentsListState extends State<StudentsList> {
                       ),
                     ),
                     
-                    trailing: DropdownButton<String>(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        side: const BorderSide(
+                            color: Colors.green,
+                            style: BorderStyle.solid,
+                            width: 2)),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                   DropdownButton<String>(
                       value: dropdownValue,
                       icon: const FaIcon(FontAwesomeIcons.sort),
                       elevation: 16,
@@ -85,14 +95,7 @@ class _StudentsListState extends State<StudentsList> {
                         );
                       }).toList(),
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        side: const BorderSide(
-                            color: Colors.green,
-                            style: BorderStyle.solid,
-                            width: 2)),
-                  ),
-                  const SizedBox(
+                    const SizedBox(
                     height: 15,
                   ),
                   SingleChildScrollView(
