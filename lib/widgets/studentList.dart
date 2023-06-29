@@ -43,71 +43,53 @@ class _StudentsListState extends State<StudentsList> {
               padding: const EdgeInsets.only(top: 15),
               child: Column(
                 children: [
-                  AnimatedSwitcher(
-                    duration: const Duration(seconds: 1),
-                    child: showTextField
-                        ? ListTile(
-                            title: TextField(
-                              controller: _searchController,
-                              decoration: InputDecoration(
-                                hintText: 'Search..',
-                                suffixIcon: IconButton(
-                                    icon: const Icon(Icons.search),
-                                    onPressed: () {
-                                      setState(() {
-                                        usern = _searchController.text;
-                                      });
-                                    }),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  borderSide: BorderSide.none
-                                ),
-                              ),
-                              
-                            ),
-                            leading: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  showTextField = !showTextField;
-                                });
-                              },
-                              icon: const FaIcon(FontAwesomeIcons.arrowLeft),
-                            ),
-                            trailing: DropdownButton<String>(
-                              value: dropdownValue,
-                              icon: const FaIcon(FontAwesomeIcons.sort),
-                              elevation: 16,
-                              style: const TextStyle(color: Colors.deepPurple),
-                              underline: Container(
-                                height: 2,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  dropdownValue = value!;
-                                  batch = value;
-                                  usern = _searchController.text;
-                                });
-                              },
-                              items: list.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),side: const BorderSide(color: Colors.green,style: BorderStyle.solid,width: 2)),
-                          )
-                        : IconButton(
+                  ListTile(
+                    title: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search..',
+                        suffixIcon: IconButton(
+                            icon: const Icon(Icons.search),
                             onPressed: () {
                               setState(() {
-                                showTextField = !showTextField;
+                                usern = _searchController.text;
                               });
-                            },
-                            icon:
-                                const FaIcon(FontAwesomeIcons.magnifyingGlass),
-                          ),
+                            }),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide.none),
+                      ),
+                    ),
+                    
+                    trailing: DropdownButton<String>(
+                      value: dropdownValue,
+                      icon: const FaIcon(FontAwesomeIcons.sort),
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String? value) {
+                        setState(() {
+                          dropdownValue = value!;
+                          batch = value;
+                          usern = _searchController.text;
+                        });
+                      },
+                      items: list.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        side: const BorderSide(
+                            color: Colors.green,
+                            style: BorderStyle.solid,
+                            width: 2)),
                   ),
                   const SizedBox(
                     height: 15,
