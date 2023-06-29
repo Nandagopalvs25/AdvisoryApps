@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/userModel.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const List<String> list = <String>['All', 'B22ECA', 'B22ECB'];
 String batch = "All";
@@ -34,8 +35,8 @@ class _StudentsListState extends State<StudentsList> {
         if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
-              title: const Center(
-                child: Text("Students"),
+              title:  Center(
+                child: Text("Students",style: GoogleFonts.robotoCondensed(fontSize: 30),),
               ),
               backgroundColor: const Color.fromARGB(47, 29, 87, 86),
             ),
