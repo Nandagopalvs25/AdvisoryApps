@@ -3,6 +3,7 @@ import 'package:advisory_app/widgets/StudentView.dart';
 import 'package:advisory_app/widgets/homepage.dart';
 import 'package:advisory_app/widgets/landingpage.dart';
 import 'package:advisory_app/widgets/login_screen.dart';
+import 'package:advisory_app/widgets/profileview.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -45,7 +46,7 @@ class RouteGenerator {
             builder: (
           _,
         ) =>
-                StudentView(username: args));
+                ProfileView(username: args));
       default:
         throw FormatException("Route not found");
     }
