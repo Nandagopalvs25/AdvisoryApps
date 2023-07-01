@@ -133,7 +133,7 @@ class _StudentsListState extends State<StudentsList> {
             child: Text('${snapshot.error}'),
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
