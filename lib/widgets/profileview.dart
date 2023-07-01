@@ -2,6 +2,7 @@ import 'package:advisory_app/api.dart';
 import 'package:advisory_app/models/userModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileView extends StatefulWidget {
@@ -57,43 +58,59 @@ class _ProfileViewState extends State<ProfileView> {
                 child: Column(
                   children: [
                     //Text(snapshot.data?.username ?? ""),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        onPressed: () {
+                          // Navigator.push(context,RouteGenerator.studentprofilePage);
+                        },
+                        icon: const FaIcon(
+                          FontAwesomeIcons.penToSquare,
+                          size: 30,
+                        ),
+                        tooltip: "Edit",
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: const Color.fromARGB(255, 0, 0, 0),
-                                      width: 3),
-                                ),
-                                child: CircleAvatar(
-                                  backgroundImage: const NetworkImage(
-                                    "https://media.discordapp.net/attachments/996754697849405540/1106485239670386719/profile.jpeg?width=400&height=400",
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: const Color.fromARGB(255, 0, 0, 0),
+                                        width: 3),
                                   ),
-                                  backgroundColor: Colors.blue[300],
-                                  radius: 60,
+                                  child: CircleAvatar(
+                                    backgroundImage: const NetworkImage(
+                                      "https://media.discordapp.net/attachments/996754697849405540/1106485239670386719/profile.jpeg?width=400&height=400",
+                                    ),
+                                    backgroundColor: Colors.blue[300],
+                                    radius: 60,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              snapshot.data?.username ?? "",
-                              style: GoogleFonts.aclonica(fontSize: 20),
-                            )
-                          ],
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                snapshot.data?.username ?? "",
+                                style: GoogleFonts.aclonica(fontSize: 20),
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
                     ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: details.length,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, index) {
@@ -102,31 +119,37 @@ class _ProfileViewState extends State<ProfileView> {
                             shadowColor: Colors.black,
                             elevation: 3,
                             child: ListTile(
-                              
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                              tileColor: const Color.fromARGB(255, 193, 234, 255),
-                              
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              tileColor:
+                                  const Color.fromARGB(255, 193, 234, 255),
                               title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 60),
+                                        padding:
+                                            const EdgeInsets.only(right: 60),
                                         child: Text(
                                           var_details[index],
                                           textAlign: TextAlign.end,
-                                          style: GoogleFonts.ptSerif(fontSize: 17,fontWeight: FontWeight.bold),
+                                          style: GoogleFonts.ptSerif(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ),
                                     // SizedBox(width: 10),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 40),
+                                        padding:
+                                            const EdgeInsets.only(left: 40),
                                         child: Text(
                                           details[index],
                                           textAlign: TextAlign.start,
-                                          style: GoogleFonts.ptSerif(fontSize: 17),
+                                          style:
+                                              GoogleFonts.ptSerif(fontSize: 17),
                                         ),
                                       ),
                                     ),
