@@ -1,5 +1,6 @@
 import 'package:advisory_app/api.dart';
 import 'package:advisory_app/models/userModel.dart';
+import 'package:advisory_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -43,6 +44,8 @@ class _ProfileViewState extends State<ProfileView> {
                 snapshot.data?.guardian_no ?? "",
                 snapshot.data?.teacher_remarks ?? "",
               ];
+              
+
               List<String> var_details = [
                 "Batch: ",
                 "Admission No: ",
@@ -62,6 +65,9 @@ class _ProfileViewState extends State<ProfileView> {
                       alignment: Alignment.topRight,
                       child: IconButton(
                         onPressed: () {
+                          Navigator.of(context, rootNavigator: true).pushNamed(
+                              RouteGenerator.studentEditPage,
+                              arguments: widget.username);
                           // Navigator.push(context,RouteGenerator.studentprofilePage);
                         },
                         icon: const FaIcon(
@@ -85,7 +91,8 @@ class _ProfileViewState extends State<ProfileView> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                        color: const Color.fromARGB(255, 0, 0, 0),
+                                        color:
+                                            const Color.fromARGB(255, 0, 0, 0),
                                         width: 3),
                                   ),
                                   child: CircleAvatar(
@@ -116,8 +123,7 @@ class _ProfileViewState extends State<ProfileView> {
                         itemBuilder: (BuildContext context, index) {
                           return Card(
                             shape: const CircleBorder(eccentricity: 0.4),
-                            shadowColor: Colors.black,
-                            elevation: 3,
+                            elevation: 2,
                             child: ListTile(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
@@ -157,6 +163,16 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                           );
                         }),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll<Color>(Colors.green)),
+                        onPressed: () {
+                          Navigator.of(context, rootNavigator: true).pushNamed(
+                              RouteGenerator.certificatePage,
+                              arguments: snapshot.data!.activity);
+                        },
+                        child: const Text("Certificates"))
                   ],
                 ),
               );

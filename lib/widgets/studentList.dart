@@ -34,98 +34,96 @@ class _StudentsListState extends State<StudentsList> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title:  Center(
                 child: Text("Students",style: GoogleFonts.robotoCondensed(fontSize: 30),),
               ),
               backgroundColor: const Color.fromARGB(47, 29, 87, 86),
             ),
-            body: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: 'Search..',
-                        suffixIcon: IconButton(
-                            icon: const Icon(Icons.search),
-                            onPressed: () {
-                              setState(() {
-                                usern = _searchController.text;
-                              });
-                            }),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            borderSide: BorderSide.none),
-                      ),
+            body: Column(
+              children: [
+                ListTile(
+                  title: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      hintText: 'Search..',
+                      suffixIcon: IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {
+                            setState(() {
+                              usern = _searchController.text;
+                            });
+                          }),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide.none),
                     ),
-                    
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        side: const BorderSide(
-                            color: Colors.green,
-                            style: BorderStyle.solid,
-                            width: 2)),
+                  ),
+                  
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      side: const BorderSide(
+                          color: Colors.green,
+                          style: BorderStyle.solid,
+                          width: 2)),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                 DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: const FaIcon(FontAwesomeIcons.sort),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String? value) {
+                      setState(() {
+                        dropdownValue = value!;
+                        batch = value;
+                        usern = _searchController.text;
+                      });
+                    },
+                    items: list.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
                   const SizedBox(
-                    height: 15,
-                  ),
-                   DropdownButton<String>(
-                      value: dropdownValue,
-                      icon: const FaIcon(FontAwesomeIcons.sort),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      onChanged: (String? value) {
-                        setState(() {
-                          dropdownValue = value!;
-                          batch = value;
-                          usern = _searchController.text;
-                        });
-                      },
-                      items: list.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(
-                    height: 15,
-                  ),
-                  SingleChildScrollView(
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pushNamed(RouteGenerator.studentprofilePage,
-                                      arguments: snapshot.data![index]
-                                          ['username']);
-                            },
-                            title: Text(snapshot.data![index]['username']),
-                            subtitle: Text(snapshot.data![index]['batch']),
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.blue[200],
-                              backgroundImage: const NetworkImage(
-                                  "https://media.discordapp.net/attachments/996754697849405540/1106485239670386719/profile.jpeg?width=400&height=400"),
-                            ),
+                  height: 15,
+                ),
+                SingleChildScrollView(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          onTap: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pushNamed(RouteGenerator.studentprofilePage,
+                                    arguments: snapshot.data![index]
+                                        ['username']);
+                          },
+                          title: Text(snapshot.data![index]['username']),
+                          subtitle: Text(snapshot.data![index]['batch']),
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.blue[200],
+                            backgroundImage: const NetworkImage(
+                                "https://media.discordapp.net/attachments/996754697849405540/1106485239670386719/profile.jpeg?width=400&height=400"),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         } else if (snapshot.hasError) {

@@ -1,4 +1,5 @@
-
+import 'package:advisory_app/certificates.dart';
+import 'package:advisory_app/models/userModel.dart';
 import 'package:advisory_app/widgets/StudentView.dart';
 import 'package:advisory_app/widgets/homepage.dart';
 import 'package:advisory_app/widgets/landingpage.dart';
@@ -11,6 +12,8 @@ class RouteGenerator {
   static const String homePage = '/homepage';
   static const String landingPage = '/landing';
   static const String studentprofilePage = '/studentView';
+  static const String studentEditPage = '/studentEdit';
+  static const String certificatePage = '/certificate';
 
   RouteGenerator._() {}
 
@@ -32,9 +35,13 @@ class RouteGenerator {
             const begin = Offset(0.0, 1.0);
             const end = Offset.zero;
             const curve = Curves.ease;
-            final tween = Tween(begin: begin,end: end).chain(CurveTween(curve: curve));
+            final tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
             final offsetAnimation = animation.drive(tween);
-            return SlideTransition(position: offsetAnimation,child: child,);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
           },
         );
       case landingPage:
@@ -47,6 +54,23 @@ class RouteGenerator {
           _,
         ) =>
                 ProfileView(username: args));
+
+      case studentEditPage:
+        final args = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (
+          _,
+        ) =>
+                StudentView(username: args));
+
+       case certificatePage:
+        final args = settings.arguments as List<Activity>;
+        return MaterialPageRoute(
+            builder: (
+          _,
+        ) =>
+                Certificates(acts: args));
+      
       default:
         throw FormatException("Route not found");
     }
