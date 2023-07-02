@@ -178,16 +178,7 @@ class _ProfileViewState extends State<ProfileView> {
               );
             } else {
               children = Scaffold(
-                appBar: AppBar(
-                  title: Padding(
-                    padding: const EdgeInsets.only(right: 60, left: 30),
-                    child: Text(
-                      "Student Profile",
-                      style: GoogleFonts.robotoCondensed(fontSize: 30),
-                    ),
-                  ),
-                  backgroundColor: const Color.fromARGB(47, 29, 87, 86),
-                ),
+                
                 body: Center(
                   child: ColorLoader5(
                     dotOneColor: Colors.redAccent,

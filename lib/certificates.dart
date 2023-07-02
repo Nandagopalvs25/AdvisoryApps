@@ -33,39 +33,70 @@ class _CertificatesState extends State<Certificates> {
             itemCount: widget.acts.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 clipBehavior: Clip.antiAlias,
-                
-                child: SizedBox(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Color.fromARGB(255, 85, 255, 176),
+                      Color.fromARGB(255, 99, 179, 244),
+                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  ),
                   width: 300,
                   height: 100,
                   child: InkWell(
-                    onTap: () async {
-                      String url = widget.acts[index].file_url ?? "";
-                      if (!await launchUrl(Uri.parse(url))) {
-                        throw Exception('Could not launch $url');
-                      }
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Column(
-                          children: [
-                            Text("Name: "),
-                            Text("Start date:"),
-                            Text("End date:")
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text(widget.acts[index].name ?? ""),
-                            Text(widget.acts[index].start_date ?? ""),
-                            Text(widget.acts[index].end_date ?? ""),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                      onTap: () async {
+                        String url = widget.acts[index].file_url ?? "";
+                        if (!await launchUrl(Uri.parse(url))) {
+                          throw Exception('Could not launch $url');
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Column(
+                            children: [
+                              Text("Name: ",
+                                  style: GoogleFonts.sarabun(fontSize: 20)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text("Start date:",
+                                  style: GoogleFonts.sarabun(fontSize: 20)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text("End date:",
+                                  style: GoogleFonts.sarabun(fontSize: 20)),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                widget.acts[index].name ?? "",
+                                style: GoogleFonts.questrial(fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                widget.acts[index].start_date ?? "",
+                                style: GoogleFonts.questrial(fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                widget.acts[index].end_date ?? "",
+                                style: GoogleFonts.questrial(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )),
                 ),
               );
             }),
