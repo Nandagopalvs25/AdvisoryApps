@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/userModel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'colorloader.dart';
 
 const List<String> list = <String>['All', 'B22ECA', 'B22ECB'];
 String batch = "All";
@@ -36,68 +37,73 @@ class _StudentsListState extends State<StudentsList> {
           return Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              title:  Center(
-                child: Text("Students",style: GoogleFonts.robotoCondensed(fontSize: 30),),
+              title: Center(
+                child: Text(
+                  "Students",
+                  style: GoogleFonts.robotoCondensed(fontSize: 30),
+                ),
               ),
               backgroundColor: const Color.fromARGB(47, 29, 87, 86),
             ),
             body: Column(
               children: [
-                ListTile(
-                  title: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      hintText: 'Search..',
-                      suffixIcon: IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {
-                            setState(() {
-                              usern = _searchController.text;
-                            });
-                          }),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: BorderSide.none),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ListTile(
+                    title: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search..',
+                        suffixIcon: IconButton(
+                            icon: const Icon(Icons.search),
+                            onPressed: () {
+                              setState(() {
+                                usern = _searchController.text;
+                              });
+                            }),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                            borderSide: BorderSide.none),
+                      ),
                     ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        side: const BorderSide(
+                            color: Colors.green,
+                            style: BorderStyle.solid,
+                            width: 2)),
                   ),
-                  
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: const BorderSide(
-                          color: Colors.green,
-                          style: BorderStyle.solid,
-                          width: 2)),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                 DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: const FaIcon(FontAwesomeIcons.sort),
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    onChanged: (String? value) {
-                      setState(() {
-                        dropdownValue = value!;
-                        batch = value;
-                        usern = _searchController.text;
-                      });
-                    },
-                    items: list.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: const FaIcon(FontAwesomeIcons.sort),
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
                   ),
-                  const SizedBox(
+                  onChanged: (String? value) {
+                    setState(() {
+                      dropdownValue = value!;
+                      batch = value;
+                      usern = _searchController.text;
+                    });
+                  },
+                  items: list.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(
                   height: 15,
                 ),
-                SingleChildScrollView(
+                Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -131,8 +137,30 @@ class _StudentsListState extends State<StudentsList> {
             child: Text('${snapshot.error}'),
           );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Center(
+              child: Text(
+                "Students",
+                style: GoogleFonts.robotoCondensed(fontSize: 30),
+              ),
+            ),
+            backgroundColor: const Color.fromARGB(47, 29, 87, 86),
+          ),
+          backgroundColor: const Color.fromARGB(47, 29, 87, 86),
+          body: Center(
+            child: ColorLoader5(
+              dotOneColor: Colors.redAccent,
+              dotTwoColor: Colors.blueAccent,
+              dotThreeColor: Colors.green,
+              dotType: DotType.circle,
+              dotIcon: const Icon(
+                Icons.adjust,
+              ),
+              duration: const Duration(seconds: 1),
+            ),
+          ),
         );
       },
     );

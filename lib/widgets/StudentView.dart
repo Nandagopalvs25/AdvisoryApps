@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'colorloader.dart';
 
 class StudentView extends StatefulWidget {
   final String username;
@@ -65,7 +66,7 @@ class _StudentViewState extends State<StudentView> {
             return ListView(
               padding: const EdgeInsets.all(9),
               children: <Widget>[
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(20.0),
                   child: CircleAvatar(
                     radius: 100,
@@ -75,7 +76,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Username: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -90,7 +91,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Batch: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -103,7 +104,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Admn no: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -116,7 +117,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                   const Text(
                       "Email: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -142,7 +143,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "DOB: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -155,7 +156,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                   const  Text(
                       "Guardian: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -168,7 +169,7 @@ class _StudentViewState extends State<StudentView> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Guardian\nno: ",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -184,8 +185,8 @@ class _StudentViewState extends State<StudentView> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 7.0),
+                      const Padding(
+                        padding:  EdgeInsets.symmetric(vertical: 7.0),
                         child: Text(
                           "Remarks: ",
                           style: TextStyle(fontSize: 20),
@@ -204,7 +205,7 @@ class _StudentViewState extends State<StudentView> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ElevatedButton(
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(Colors.green)),
                     onPressed: () async {
@@ -260,7 +261,16 @@ class _StudentViewState extends State<StudentView> {
           } else if (snapshot.hasError) {}
 
           return Center(
-            child: CircularProgressIndicator(),
+            child: ColorLoader5(
+                    dotOneColor: Colors.redAccent,
+                    dotTwoColor: Colors.blueAccent,
+                    dotThreeColor: Colors.green,
+                    dotType: DotType.circle,
+                    dotIcon: const Icon(
+                      Icons.adjust,
+                    ),
+                    duration: const Duration(seconds: 1),
+                  ),
           );
         },
 

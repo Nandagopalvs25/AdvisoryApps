@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'colorloader.dart';
 
 class ProfileView extends StatefulWidget {
   final String username;
@@ -44,7 +45,6 @@ class _ProfileViewState extends State<ProfileView> {
                 snapshot.data?.guardian_no ?? "",
                 snapshot.data?.teacher_remarks ?? "",
               ];
-              
 
               List<String> var_details = [
                 "Batch: ",
@@ -164,7 +164,7 @@ class _ProfileViewState extends State<ProfileView> {
                           );
                         }),
                     ElevatedButton(
-                        style: ButtonStyle(
+                        style: const ButtonStyle(
                             backgroundColor:
                                 MaterialStatePropertyAll<Color>(Colors.green)),
                         onPressed: () {
@@ -177,12 +177,29 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
               );
             } else {
-              children = const Column(
-                children: [
-                  Center(
-                    child: CircularProgressIndicator(),
+              children = Scaffold(
+                appBar: AppBar(
+                  title: Padding(
+                    padding: const EdgeInsets.only(right: 60, left: 30),
+                    child: Text(
+                      "Student Profile",
+                      style: GoogleFonts.robotoCondensed(fontSize: 30),
+                    ),
                   ),
-                ],
+                  backgroundColor: const Color.fromARGB(47, 29, 87, 86),
+                ),
+                body: Center(
+                  child: ColorLoader5(
+                    dotOneColor: Colors.redAccent,
+                    dotTwoColor: Colors.blueAccent,
+                    dotThreeColor: Colors.green,
+                    dotType: DotType.circle,
+                    dotIcon: const Icon(
+                      Icons.adjust,
+                    ),
+                    duration: const Duration(seconds: 1),
+                  ),
+                ),
               );
             }
 

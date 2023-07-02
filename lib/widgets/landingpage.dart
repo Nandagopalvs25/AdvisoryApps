@@ -1,6 +1,7 @@
 import 'package:advisory_app/api.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'colorloader.dart';
 
 import '../routes.dart';
 
@@ -42,6 +43,15 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return  Scaffold(body: Center(child: ColorLoader5(
+                    dotOneColor: Colors.redAccent,
+                    dotTwoColor: Colors.blueAccent,
+                    dotThreeColor: Colors.green,
+                    dotType: DotType.circle,
+                    dotIcon: const Icon(
+                      Icons.adjust,
+                    ),
+                    duration: const Duration(seconds: 1),
+                  )));
   }
 }
