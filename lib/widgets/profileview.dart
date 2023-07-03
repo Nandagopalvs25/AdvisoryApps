@@ -68,7 +68,6 @@ class _ProfileViewState extends State<ProfileView> {
                           Navigator.of(context, rootNavigator: true).pushNamed(
                               RouteGenerator.studentEditPage,
                               arguments: widget.username);
-                          // Navigator.push(context,RouteGenerator.studentprofilePage);
                         },
                         icon: const FaIcon(
                           FontAwesomeIcons.penToSquare,
