@@ -143,24 +143,7 @@ class _loginState extends State<login> {
               ),
             ),
           )
-          // TextButton(
-          //     onPressed: () async {
-          //       final username = _username.text;
-          //       final password = _password.text;
-          //       Baseapi api = Baseapi();
-          //       var res = await api.login(username, password);
-          //       if (res.statusCode == 200) {
-          //         Map<String, dynamic> user = jsonDecode(res.body);
-          //         String token = user['key'];
-          //         SharedPreferences prefs =
-          //             await SharedPreferences.getInstance();
-          //         await prefs.setString("username", (username));
-          //         await prefs.setString("token", token);
-          //         Navigator.of(context)?.pushNamedAndRemoveUntil(
-          //             RouteGenerator.homePage, (Route<dynamic> route) => false);
-          //       }
-          //     },
-          //     child: Text('Log in'))
+         
         ],
       ),
     );
